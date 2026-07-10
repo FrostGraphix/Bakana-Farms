@@ -130,6 +130,39 @@ const FONT_IMPORT = `
 
 /* ---------- shared bits ---------- */
 
+const BLogo = ({ size = 20, className }) => (
+  <svg
+    viewBox="0 0 100 100"
+    width={size}
+    height={size}
+    className={className}
+    style={{ display: "inline-block", verticalAlign: "middle" }}
+  >
+    <defs>
+      <linearGradient id="logoFarmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#E8CC72" />
+        <stop offset="50%" stop-color="#B5602C" />
+        <stop offset="100%" stop-color="#2F5233" />
+      </linearGradient>
+    </defs>
+    <g transform="translate(6, 0)">
+      {/* Stem / Spine of B */}
+      <path d="M 32 20 Q 30 50 32 80" fill="none" stroke="url(#logoFarmGrad)" strokeWidth="7" strokeLinecap="round" />
+      <path d="M 32 20 Q 30 50 32 80" fill="none" stroke="#E8CC72" strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
+      
+      {/* Top Leaf Loop */}
+      <path d="M 33 22 C 58 16 72 38 52 48 C 44 48 37 46 33 48 C 33 48 42 38 43 30 C 44 24 38 23 33 22 Z" 
+            fill="url(#logoFarmGrad)" />
+      <path d="M 33 22 Q 46 33 52 48" fill="none" stroke="#E8CC72" strokeWidth="1.5" opacity="0.7" />
+
+      {/* Bottom Leaf Loop */}
+      <path d="M 33 48 C 60 44 75 70 54 80 C 46 80 37 78 33 80 C 33 80 42 68 43 58 C 44 52 38 50 33 48 Z" 
+            fill="url(#logoFarmGrad)" />
+      <path d="M 33 48 Q 47 62 54 80" fill="none" stroke="#E8CC72" strokeWidth="1.5" opacity="0.7" />
+    </g>
+  </svg>
+);
+
 const Eyebrow = ({ children, dark }) => (
   <div
     className="ff-mono uppercase flex items-center gap-2 text-[11px] tracking-[0.25em]"
@@ -167,11 +200,9 @@ const Stamp = ({ size = 108, dark }) => (
         </textPath>
       </text>
     </svg>
-    <Leaf
+    <BLogo
       className="absolute"
-      size={size * 0.28}
-      color={dark ? "#E8CC72" : "#2F5233"}
-      strokeWidth={1.4}
+      size={size * 0.35}
     />
   </div>
 );
@@ -190,7 +221,7 @@ const SlideShell = ({ children, bg, tone = "light", index, total }) => (
 const TopBar = ({ tone, label }) => (
   <div className="flex items-center justify-between mb-6 md:mb-10 shrink-0">
     <div className="flex items-center gap-2.5">
-      <Leaf size={16} strokeWidth={2} color={tone === "dark" ? "#E8CC72" : "#2F5233"} />
+      <BLogo size={16} />
       <span className="ff-mono text-[10px] md:text-[11px] tracking-[0.22em] uppercase opacity-70">
         Flow Pixels <span className="opacity-50">for</span> Bakana Farms Ltd.
       </span>
@@ -872,7 +903,7 @@ const TeaBox = ({ label = "MORINGA · HONEY · GINGER" }) => (
     style={{ background: "linear-gradient(160deg,#1C3325,#16281F)", border: "1px solid rgba(232,204,114,.3)" }}
   >
     <div className="flex items-center justify-between">
-      <Leaf size={14} color="var(--gold-light)" />
+      <BLogo size={14} />
       <span className="ff-mono text-[7px] tracking-widest opacity-60" style={{ color: "var(--ivory)" }}>EST 2022</span>
     </div>
     <div className="text-center">
@@ -913,7 +944,7 @@ const SlideBrandApplication = () => (
         <div className="w-56 p-4 rounded-xl shadow-xl" style={{ background: "var(--forest)", color: "var(--ivory)" }}>
           <div className="ff-mono text-[9px] uppercase tracking-[0.2em] opacity-50 mb-3">Social Post Template</div>
           <div className="aspect-square rounded-lg flex flex-col items-center justify-center gap-2" style={{ background: "linear-gradient(160deg,#2F5233,#16281F)" }}>
-            <Leaf size={22} color="var(--gold-light)" />
+            <BLogo size={22} />
             <span className="ff-serif italic text-sm" style={{ color: "var(--gold-light)" }}>Rooted in soil.</span>
             <span className="ff-serif text-xs">Refined for the world.</span>
           </div>
@@ -922,7 +953,7 @@ const SlideBrandApplication = () => (
         <div className="w-56 p-4 rounded-xl shadow-xl" style={{ background: "var(--ivory)" }}>
           <div className="ff-mono text-[9px] uppercase tracking-[0.2em] opacity-50 mb-2">Business Card</div>
           <div className="rounded-lg p-4 h-28 flex flex-col justify-between" style={{ background: "var(--bark)", color: "var(--ivory)" }}>
-            <Leaf size={14} color="var(--gold-light)" />
+            <BLogo size={14} />
             <div>
               <div className="ff-serif italic text-sm" style={{ color: "var(--gold-light)" }}>Bakana Farms</div>
               <div className="ff-mono text-[7px] opacity-60 mt-1">EXPORT & TRADE · NIGERIA</div>
@@ -1001,7 +1032,7 @@ const SlideHomepageUI = () => (
         {/* nav */}
         <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: "1px solid rgba(36,26,18,.08)" }}>
           <div className="flex items-center gap-2">
-            <Leaf size={14} color="var(--canopy)" />
+            <BLogo size={14} />
             <span className="ff-serif italic text-sm">Bakana Farms</span>
           </div>
           <div className="hidden sm:flex gap-6 ff-mono text-[9px] uppercase tracking-[0.14em] opacity-60">
