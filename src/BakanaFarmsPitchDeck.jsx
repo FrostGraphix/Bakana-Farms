@@ -140,25 +140,25 @@ const BLogo = ({ size = 20, className }) => (
   >
     <defs>
       <linearGradient id="logoFarmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#E8CC72" />
-        <stop offset="50%" stop-color="#B5602C" />
-        <stop offset="100%" stop-color="#2F5233" />
+        <stop offset="0%" stop-color="#1C3F24" />
+        <stop offset="50%" stop-color="#2F5233" />
+        <stop offset="100%" stop-color="#68B277" />
       </linearGradient>
     </defs>
     <g transform="translate(6, 0)">
       {/* Stem / Spine of B */}
-      <path d="M 32 20 Q 30 50 32 80" fill="none" stroke="url(#logoFarmGrad)" strokeWidth="7" strokeLinecap="round" />
-      <path d="M 32 20 Q 30 50 32 80" fill="none" stroke="#E8CC72" strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
+      <path d="M 32 18 L 32 82" fill="none" stroke="url(#logoFarmGrad)" strokeWidth="10" stroke-linecap="round" />
+      <path d="M 32 18 L 32 82" fill="none" stroke="#EAF0E4" stroke-width="2" stroke-linecap="round" opacity="0.4" />
       
       {/* Top Leaf Loop */}
-      <path d="M 33 22 C 58 16 72 38 52 48 C 44 48 37 46 33 48 C 33 48 42 38 43 30 C 44 24 38 23 33 22 Z" 
-            fill="url(#logoFarmGrad)" />
-      <path d="M 33 22 Q 46 33 52 48" fill="none" stroke="#E8CC72" strokeWidth="1.5" opacity="0.7" />
+      <path d="M 32 20 C 65 14 80 40 54 50 C 42 50 35 46 32 48 Z" fill="url(#logoFarmGrad)" />
+      {/* Top Leaf Vein */}
+      <path d="M 32 20 Q 48 33 54 50" fill="none" stroke="#EAF0E4" stroke-width="2.5" stroke-linecap="round" opacity="0.8" />
 
       {/* Bottom Leaf Loop */}
-      <path d="M 33 48 C 60 44 75 70 54 80 C 46 80 37 78 33 80 C 33 80 42 68 43 58 C 44 52 38 50 33 48 Z" 
-            fill="url(#logoFarmGrad)" />
-      <path d="M 33 48 Q 47 62 54 80" fill="none" stroke="#E8CC72" strokeWidth="1.5" opacity="0.7" />
+      <path d="M 32 48 C 68 44 85 72 56 82 C 44 82 35 78 32 80 Z" fill="url(#logoFarmGrad)" />
+      {/* Bottom Leaf Vein */}
+      <path d="M 32 48 Q 50 64 56 82" fill="none" stroke="#EAF0E4" stroke-width="2.5" stroke-linecap="round" opacity="0.8" />
     </g>
   </svg>
 );
