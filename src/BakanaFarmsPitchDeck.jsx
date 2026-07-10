@@ -139,26 +139,38 @@ const BLogo = ({ size = 20, className }) => (
     style={{ display: "inline-block", verticalAlign: "middle" }}
   >
     <defs>
-      <linearGradient id="logoFarmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#1C3F24" />
-        <stop offset="50%" stop-color="#2F5233" />
-        <stop offset="100%" stop-color="#68B277" />
+      <linearGradient id="logoStemGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#2F5233" />
+        <stop offset="100%" stop-color="#16281F" />
+      </linearGradient>
+      <linearGradient id="logoDarkLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#16281F" />
+        <stop offset="100%" stop-color="#2F5233" />
+      </linearGradient>
+      <linearGradient id="logoLightLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#2F5233" />
+        <stop offset="100%" stop-color="#5DA36A" />
       </linearGradient>
     </defs>
-    <g transform="translate(6, 0)">
-      {/* Stem / Spine of B */}
-      <path d="M 32 18 L 32 82" fill="none" stroke="url(#logoFarmGrad)" strokeWidth="10" stroke-linecap="round" />
-      <path d="M 32 18 L 32 82" fill="none" stroke="#EAF0E4" stroke-width="2" stroke-linecap="round" opacity="0.4" />
+    <g transform="translate(4, 0)">
+      {/* Stem (Spine) */}
+      <path d="M 33 16 L 33 84" fill="none" stroke="url(#logoStemGrad)" strokeWidth="7" stroke-linecap="round" />
       
-      {/* Top Leaf Loop */}
-      <path d="M 32 20 C 65 14 80 40 54 50 C 42 50 35 46 32 48 Z" fill="url(#logoFarmGrad)" />
-      {/* Top Leaf Vein */}
-      <path d="M 32 20 Q 48 33 54 50" fill="none" stroke="#EAF0E4" stroke-width="2.5" stroke-linecap="round" opacity="0.8" />
+      {/* Top Leaf (Folded) */}
+      {/* Left Half (Dark) */}
+      <path d="M 33.5 20 C 48 20 54 28 50 48 C 42 46 37 46 33.5 48 Z" fill="url(#logoDarkLeaf)" />
+      {/* Right Half (Light) */}
+      <path d="M 33.5 20 C 58 20 66 30 50 48 L 33.5 48 Z" fill="url(#logoLightLeaf)" />
+      {/* Leaf Vein Divider */}
+      <path d="M 33.5 20 Q 43 32 50 48" fill="none" stroke="#EAF0E4" stroke-width="1.5" opacity="0.6" stroke-linecap="round" />
 
-      {/* Bottom Leaf Loop */}
-      <path d="M 32 48 C 68 44 85 72 56 82 C 44 82 35 78 32 80 Z" fill="url(#logoFarmGrad)" />
-      {/* Bottom Leaf Vein */}
-      <path d="M 32 48 Q 50 64 56 82" fill="none" stroke="#EAF0E4" stroke-width="2.5" stroke-linecap="round" opacity="0.8" />
+      {/* Bottom Leaf (Folded) */}
+      {/* Left Half (Dark) */}
+      <path d="M 33.5 48 C 50 48 56 56 52 80 C 43 78 37 78 33.5 80 Z" fill="url(#logoDarkLeaf)" />
+      {/* Right Half (Light) */}
+      <path d="M 33.5 48 C 62 48 70 60 52 80 L 33.5 80 Z" fill="url(#logoLightLeaf)" />
+      {/* Leaf Vein Divider */}
+      <path d="M 33.5 48 Q 44 62 52 80" fill="none" stroke="#EAF0E4" stroke-width="1.5" opacity="0.6" stroke-linecap="round" />
     </g>
   </svg>
 );
