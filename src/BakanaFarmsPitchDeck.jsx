@@ -140,21 +140,21 @@ const BLogo = ({ size = 20, className }) => (
   >
     <defs>
       <linearGradient id="logoStemGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#2F5233" />
-        <stop offset="100%" stop-color="#16281F" />
+        <stop offset="0%" stopColor="#2F5233" />
+        <stop offset="100%" stopColor="#16281F" />
       </linearGradient>
       <linearGradient id="logoDarkLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#16281F" />
-        <stop offset="100%" stop-color="#2F5233" />
+        <stop offset="0%" stopColor="#16281F" />
+        <stop offset="100%" stopColor="#2F5233" />
       </linearGradient>
       <linearGradient id="logoLightLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#2F5233" />
-        <stop offset="100%" stop-color="#5DA36A" />
+        <stop offset="0%" stopColor="#2F5233" />
+        <stop offset="100%" stopColor="#5DA36A" />
       </linearGradient>
     </defs>
     <g transform="translate(4, 0)">
       {/* Stem (Spine) */}
-      <path d="M 33 16 L 33 84" fill="none" stroke="url(#logoStemGrad)" strokeWidth="7" stroke-linecap="round" />
+      <path d="M 33 16 L 33 84" fill="none" stroke="url(#logoStemGrad)" strokeWidth="7" strokeLinecap="round" />
       
       {/* Top Leaf (Folded) */}
       {/* Left Half (Dark) */}
@@ -162,7 +162,7 @@ const BLogo = ({ size = 20, className }) => (
       {/* Right Half (Light) */}
       <path d="M 33.5 20 C 58 20 66 30 50 48 L 33.5 48 Z" fill="url(#logoLightLeaf)" />
       {/* Leaf Vein Divider */}
-      <path d="M 33.5 20 Q 43 32 50 48" fill="none" stroke="#EAF0E4" stroke-width="1.5" opacity="0.6" stroke-linecap="round" />
+      <path d="M 33.5 20 Q 43 32 50 48" fill="none" stroke="#EAF0E4" strokeWidth="1.5" opacity="0.6" strokeLinecap="round" />
 
       {/* Bottom Leaf (Folded) */}
       {/* Left Half (Dark) */}
@@ -170,7 +170,7 @@ const BLogo = ({ size = 20, className }) => (
       {/* Right Half (Light) */}
       <path d="M 33.5 48 C 62 48 70 60 52 80 L 33.5 80 Z" fill="url(#logoLightLeaf)" />
       {/* Leaf Vein Divider */}
-      <path d="M 33.5 48 Q 44 62 52 80" fill="none" stroke="#EAF0E4" stroke-width="1.5" opacity="0.6" stroke-linecap="round" />
+      <path d="M 33.5 48 Q 44 62 52 80" fill="none" stroke="#EAF0E4" strokeWidth="1.5" opacity="0.6" strokeLinecap="round" />
     </g>
   </svg>
 );
@@ -238,9 +238,24 @@ const TopBar = ({ tone, label }) => (
         Flow Pixels <span className="opacity-50">for</span> Bakana Farms Ltd.
       </span>
     </div>
-    <span className="ff-mono text-[10px] md:text-[11px] tracking-[0.22em] uppercase opacity-50">
-      {label}
-    </span>
+    <div className="flex items-center gap-3">
+      <a
+        href="/tracker.html"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="ff-mono text-[9px] md:text-[10px] tracking-[0.14em] uppercase px-2.5 py-1 rounded-full border transition-all hover:scale-105"
+        style={{
+          borderColor: tone === "dark" ? "rgba(232,204,114,.4)" : "rgba(36,26,18,.3)",
+          color: tone === "dark" ? "var(--gold-light)" : "var(--ginger)",
+          background: tone === "dark" ? "rgba(232,204,114,.1)" : "rgba(181,96,44,.08)"
+        }}
+      >
+        Project Tracker ↗
+      </a>
+      <span className="ff-mono text-[10px] md:text-[11px] tracking-[0.22em] uppercase opacity-50">
+        {label}
+      </span>
+    </div>
   </div>
 );
 
