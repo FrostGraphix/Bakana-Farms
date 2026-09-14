@@ -372,6 +372,32 @@ Never `--no-verify` on commit or push. Fix the underlying failure.
 
 ---
 
+## Git Branching and Pull Request Workflow
+
+Direct pushes to `main` are prohibited. Every change must follow the branch, PR, and merge workflow:
+
+1. **Branch**: Create a descriptive branch from up-to-date `main`:
+   ```bash
+   git checkout -b <type>/<short-description>
+   ```
+2. **Commit**: Commit following the Commit Message Standard.
+3. **Push**: Push the branch to origin:
+   ```bash
+   git push -u origin <branch-name>
+   ```
+4. **Pull Request**: Open a PR via `gh`:
+   ```bash
+   gh pr create --title "<type>: <description>" --body "<summary>"
+   ```
+5. **Merge**: Once quality checks pass, merge into `main` and sync local:
+   ```bash
+   gh pr merge --merge --delete-branch
+   git checkout main
+   git pull origin main
+   ```
+
+---
+
 ## Copy and Content Standards
 
 The brand voice is warm, premium, honest, educational without being clinical. Discovery explicitly rejects anything that reads cheap, cluttered, pharmaceutical, or like generic "local herb" packaging.
