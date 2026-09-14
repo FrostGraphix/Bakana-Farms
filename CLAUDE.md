@@ -30,6 +30,10 @@ Use the local binaries directly:
 
 Typecheck constantly. Build before declaring a task done. Both must pass.
 
+## Git and PR workflow
+
+Never push directly to `main`. Always create a branch, commit according to the standard (`type: description`), push the branch, open a PR via GitHub (`gh pr create`), and merge into `main` (`gh pr merge`).
+
 ## Running the app
 
 ```bash
