@@ -6,11 +6,11 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const supportSchema = z.object({
-  name: z.string().trim().min(2).max(120),
-  email: z.string().trim().email().max(254),
+  name: z.string().trim().min(2, "Please enter your name (at least 2 characters)").max(120, "Name must not exceed 120 characters"),
+  email: z.string().trim().email("Please provide a valid email address").max(254),
   orderReference: z.string().trim().max(80).optional(),
-  subject: z.string().trim().min(2).max(160),
-  message: z.string().trim().min(10).max(3000),
+  subject: z.string().trim().min(2, "Please enter an inquiry subject (at least 2 characters)").max(160, "Subject must not exceed 160 characters"),
+  message: z.string().trim().min(10, "Please provide more details (at least 10 characters)").max(3000, "Message must not exceed 3,000 characters"),
 });
 
 export async function POST(request: Request) {

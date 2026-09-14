@@ -265,7 +265,7 @@ export function CustomerAuthFlow({
 
       {/* Right Column: Precision Authentication Glass Card */}
       <div className="w-full min-w-0 max-w-full">
-        <div className="glass-card w-full min-w-0 max-w-full overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-subtle)] border-t-2 border-t-[var(--accent-line)] p-6 sm:p-8 lg:p-10 shadow-[var(--elevation-raised)]">
+        <div className="glass-card w-full min-w-0 max-w-full overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-subtle)] border-t-2 border-t-[var(--accent-line)] p-5 sm:p-8 lg:p-10 shadow-[var(--elevation-raised)]">
           {/* Segmented Mode Switcher (Sign In vs Create Account) */}
           {mode !== "setup-password" ? (
             <div className="grid grid-cols-2 rounded-[var(--radius-md)] bg-[var(--surface-subtle)] p-1 mb-7 border border-[var(--border-subtle)]">
@@ -276,7 +276,7 @@ export function CustomerAuthFlow({
                   setError(null);
                 }}
                 className={cn(
-                  "rounded-[var(--radius-sm)] py-2 text-[length:var(--text-body-sm)] font-medium transition-all cursor-pointer",
+                  "min-h-[44px] rounded-[var(--radius-sm)] py-2 text-[length:var(--text-body-sm)] font-medium transition-all inline-flex items-center justify-center cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border-focus)]",
                   mode === "sign-in"
                     ? "bg-[var(--surface-raised)] text-[var(--text-primary)] shadow-sm font-semibold"
                     : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
@@ -291,7 +291,7 @@ export function CustomerAuthFlow({
                   setError(null);
                 }}
                 className={cn(
-                  "rounded-[var(--radius-sm)] py-2 text-[length:var(--text-body-sm)] font-medium transition-all cursor-pointer",
+                  "min-h-[44px] rounded-[var(--radius-sm)] py-2 text-[length:var(--text-body-sm)] font-medium transition-all inline-flex items-center justify-center cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border-focus)]",
                   mode === "register"
                     ? "bg-[var(--surface-raised)] text-[var(--text-primary)] shadow-sm font-semibold"
                     : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"

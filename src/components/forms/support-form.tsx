@@ -39,8 +39,42 @@ export function SupportForm() {
     });
   }
 
+  function validate(data: typeof initialFields): Record<string, string> {
+    const errs: Record<string, string> = {};
+    if (!data.name.trim() || data.name.trim().length < 2) {
+      errs.name = "Please enter your name (at least 2 characters)";
+    }
+    if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) {
+      errs.email = "Please provide a valid email address";
+    }
+    if (!data.subject.trim() || data.subject.trim().length < 2) {
+      errs.subject = "Please enter an inquiry subject (at least 2 characters)";
+    }
+    if (!data.message.trim() || data.message.trim().length < 10) {
+      errs.message = "Please provide more details (at least 10 characters)";
+    }
+    return errs;
+  }
+
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const clientErrors = validate(fields);
+    if (Object.keys(clientErrors).length > 0) {
+      setErrors(clientErrors);
+      setStatus("idle");
+      toast({
+        title: "Please complete required fields",
+        description: "Check the highlighted fields to continue.",
+        variant: "error",
+      });
+      const firstKey = Object.keys(clientErrors)[0];
+      if (firstKey) {
+        const el = document.getElementById(`support-${firstKey}`);
+        el?.focus();
+      }
+      return;
+    }
+
     setStatus("sending");
     setErrors({});
 
@@ -98,9 +132,10 @@ export function SupportForm() {
 
   return (
     <form
+      id="contact-form"
       onSubmit={submit}
       noValidate
-      className="glass-card w-full min-w-0 max-w-full overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--surface-raised)] p-6 sm:p-8 lg:p-10 shadow-[var(--elevation-raised)]"
+      className="glass-card w-full min-w-0 max-w-full overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--surface-raised)] p-5 sm:p-8 lg:p-10 shadow-[var(--elevation-raised)]"
     >
       {/* Header */}
       <div className="border-b border-[var(--border-subtle)] pb-5 mb-7">
@@ -127,9 +162,9 @@ export function SupportForm() {
               type="button"
               onClick={() => update("subject", preset)}
               className={cn(
-                "rounded-full border px-3 py-1 text-[length:var(--text-caption)] transition-colors cursor-pointer",
+                "min-h-[40px] rounded-full border px-3.5 py-1.5 text-[length:var(--text-body-sm)] transition-colors inline-flex items-center justify-center font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border-focus)] cursor-pointer",
                 fields.subject === preset
-                  ? "border-[var(--accent-line)] bg-[var(--surface-subtle)] text-[var(--accent-text)] font-semibold"
+                  ? "border-[var(--accent-line)] bg-[var(--surface-subtle)] text-[var(--accent-text)] font-semibold shadow-xs"
                   : "border-[var(--border-subtle)] bg-[var(--surface-raised)] text-[var(--text-secondary)] hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]"
               )}
             >

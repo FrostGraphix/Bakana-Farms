@@ -35,7 +35,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
         <h1 className="mt-2 font-[family-name:var(--font-display)] text-[length:var(--text-display-md)] font-semibold text-[var(--text-primary)]">Search Bakana.</h1>
       </div>
 
-      <form action="/search" className="mt-8 flex w-full max-w-2xl min-w-0 max-w-full gap-3" role="search">
+      <form action="/search" className="mt-8 flex flex-col sm:flex-row w-full max-w-2xl min-w-0 max-w-full gap-3" role="search">
         <label className="relative flex-1 min-w-0">
           <span className="sr-only">Search products</span>
           <MagnifyingGlass aria-hidden size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]" />
@@ -43,13 +43,13 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
             name="q"
             type="search"
             defaultValue={query}
-            placeholder="Try moringa, ginger, honey, export..."
-            className="h-14 w-full min-w-0 max-w-full rounded-full border border-[var(--border-subtle)] bg-[var(--surface-raised)] pl-12 pr-4 text-[length:var(--text-body)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border-focus)]"
+            placeholder="Try moringa, ginger, honey..."
+            className="h-12 sm:h-14 w-full min-w-0 max-w-full rounded-full border border-[var(--border-subtle)] bg-[var(--surface-raised)] pl-12 pr-4 text-[length:var(--text-body)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border-focus)]"
           />
         </label>
         <button
           type="submit"
-          className="h-14 shrink-0 rounded-full bg-[var(--action-primary-bg)] px-7 font-medium text-[var(--action-primary-text)] cursor-pointer hover:bg-[var(--action-primary-bg-hover)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border-focus)]"
+          className="h-12 sm:h-14 shrink-0 rounded-full bg-[var(--action-primary-bg)] px-7 font-medium text-[var(--action-primary-text)] cursor-pointer hover:bg-[var(--action-primary-bg-hover)] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border-focus)]"
         >
           Search
         </button>

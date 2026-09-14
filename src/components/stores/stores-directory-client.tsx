@@ -47,7 +47,7 @@ export function StoresDirectoryClient({ initialStores }: StoresDirectoryClientPr
                 key={region}
                 type="button"
                 onClick={() => setSelectedRegion(region)}
-                className={`rounded-full px-4 py-2 text-[length:var(--text-body-sm)] font-medium transition-all duration-200 cursor-pointer ${
+                className={`min-h-[40px] inline-flex items-center justify-center rounded-full px-4 py-2 text-[length:var(--text-body-sm)] font-medium transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border-focus)] ${
                   isActive
                     ? "bg-[var(--action-primary-bg)] text-[var(--action-primary-text)] shadow-md"
                     : "border border-[var(--border-subtle)] bg-[var(--surface-subtle)] text-[var(--text-secondary)] hover:border-[var(--border-strong)] hover:text-[var(--text-primary)]"
@@ -72,7 +72,7 @@ export function StoresDirectoryClient({ initialStores }: StoresDirectoryClientPr
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search city, street or amenity..."
             aria-label="Filter stores"
-            className="w-full h-11 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-page)] pl-10 pr-4 text-[length:var(--text-body)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] focus:border-[var(--border-focus)] focus:outline-none"
+            className="w-full h-11 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-page)] pl-10 pr-4 text-[length:var(--text-body)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border-focus)]"
           />
         </div>
       </div>

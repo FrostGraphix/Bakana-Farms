@@ -23,24 +23,19 @@ const GUEST_COOKIE = "bf_cart";
  * the wholesale enquiry flow rather than card checkout.
  */
 const addressSchema = z.object({
-  recipient: z.string().min(2).max(120),
-  line1: z.string().min(3).max(200),
-  line2: z.string().max(200).optional(),
-  city: z.string().min(2).max(100),
-  state: z.string().min(2).max(100),
-  postalCode: z.string().max(20).optional(),
+  recipient: z.string().trim().min(2, "Please enter recipient name (at least 2 characters)").max(120, "Recipient name is too long"),
+  line1: z.string().trim().min(3, "Please enter street address (at least 3 characters)").max(200, "Street address is too long"),
+  line2: z.string().trim().max(200).optional(),
+  city: z.string().trim().min(2, "Please enter city").max(100),
+  state: z.string().trim().min(2, "Please enter state").max(100),
+  postalCode: z.string().trim().max(20).optional(),
   countryCode: z.literal("NG"),
-  phone: z.string().min(7).max(24),
+  phone: z.string().trim().min(7, "Please enter a valid phone number (at least 7 digits)").max(24, "Phone number is too long"),
 });
 
 const checkoutSchema = z.object({
-  email: z.string().email().max(254),
+  email: z.string().trim().email("Please provide a valid email address").max(254),
   shippingAddress: addressSchema,
-  /**
-   * Generated client-side per checkout attempt. The unique index
-   * on orders.idempotency_key is what makes a double-submit or a
-   * retried request return the same order instead of a second one.
-   */
   idempotencyKey: z.string().uuid(),
 });
 

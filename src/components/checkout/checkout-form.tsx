@@ -87,7 +87,6 @@ export function CheckoutForm() {
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setPending(true);
     setFormError(null);
     setFieldErrors({});
 
@@ -106,6 +105,38 @@ export function CheckoutForm() {
         phone: String(data.get("phone") ?? ""),
       },
     };
+
+    const localErrors: FieldErrors = {};
+    if (!payload.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email.trim())) {
+      localErrors["email"] = "Please provide a valid email address";
+    }
+    if (!payload.shippingAddress.recipient.trim() || payload.shippingAddress.recipient.trim().length < 2) {
+      localErrors["shippingAddress.recipient"] = "Please enter recipient name (at least 2 characters)";
+    }
+    if (!payload.shippingAddress.line1.trim() || payload.shippingAddress.line1.trim().length < 3) {
+      localErrors["shippingAddress.line1"] = "Please enter street address (at least 3 characters)";
+    }
+    if (!payload.shippingAddress.city.trim() || payload.shippingAddress.city.trim().length < 2) {
+      localErrors["shippingAddress.city"] = "Please enter city";
+    }
+    if (!payload.shippingAddress.state.trim() || payload.shippingAddress.state.trim().length < 2) {
+      localErrors["shippingAddress.state"] = "Please enter state";
+    }
+    if (!payload.shippingAddress.phone.trim() || payload.shippingAddress.phone.trim().length < 7) {
+      localErrors["shippingAddress.phone"] = "Please enter a valid phone number (at least 7 digits)";
+    }
+
+    if (Object.keys(localErrors).length > 0) {
+      setFieldErrors(localErrors);
+      setFormError("Please complete the highlighted delivery fields.");
+      const first = Object.keys(localErrors)[0]?.split(".").pop();
+      if (first) {
+        formRef.current?.querySelector<HTMLInputElement>(`[name="${first}"]`)?.focus();
+      }
+      return;
+    }
+
+    setPending(true);
 
     try {
       const res = await fetch("/api/checkout", {

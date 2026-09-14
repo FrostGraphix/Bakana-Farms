@@ -29,8 +29,8 @@ export function NewsletterForm({
     const form = e.currentTarget;
     const email = new FormData(form).get("email");
 
-    if (typeof email !== "string" || !email.includes("@")) {
-      setError("Enter an email address we can reach you at.");
+    if (typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError("Enter a valid email address we can reach you at.");
       setStatus("error");
       form.querySelector<HTMLInputElement>("input[name=email]")?.focus();
       return;

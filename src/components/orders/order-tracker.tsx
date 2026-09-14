@@ -32,13 +32,36 @@ export function OrderTracker({ initialReference = "" }: { initialReference?: str
   const [reference, setReference] = React.useState(initialReference);
   const [email, setEmail] = React.useState("");
   const [order, setOrder] = React.useState<OrderResult | null>(null);
+  const [fieldErrors, setFieldErrors] = React.useState<Record<string, string>>({});
   const [error, setError] = React.useState("");
   const [loading, setLoading] = React.useState(false);
+
+  function validate(): boolean {
+    const errs: Record<string, string> = {};
+    if (!reference.trim() || reference.trim().length < 3) {
+      errs.reference = "Please enter your order reference (e.g. BF-12345)";
+    }
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      errs.email = "Please enter a valid checkout email address";
+    }
+    setFieldErrors(errs);
+    if (Object.keys(errs).length > 0) {
+      const firstId = Object.keys(errs)[0];
+      if (firstId) {
+        document.getElementById(`tracker-${firstId}`)?.focus();
+      }
+      return false;
+    }
+    return true;
+  }
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
     setOrder(null);
+
+    if (!validate()) return;
+
     setLoading(true);
 
     try {
@@ -49,12 +72,12 @@ export function OrderTracker({ initialReference = "" }: { initialReference?: str
       });
       const body = await response.json();
       if (!response.ok) {
-        setError(body.error ?? "Order lookup failed.");
+        setError(body.error ?? "No order found matching those credentials. Please verify your reference and email.");
         return;
       }
       setOrder(body.order);
     } catch {
-      setError("Check your connection and retry.");
+      setError("Unable to connect to the server. Please check your connection and retry.");
     } finally {
       setLoading(false);
     }
@@ -65,7 +88,7 @@ export function OrderTracker({ initialReference = "" }: { initialReference?: str
       <form
         onSubmit={submit}
         noValidate
-        className="glass-card h-fit w-full min-w-0 max-w-full overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--surface-raised)] p-6 sm:p-8 shadow-[var(--elevation-raised)] space-y-5"
+        className="glass-card h-fit w-full min-w-0 max-w-full overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--surface-raised)] p-5 sm:p-8 shadow-[var(--elevation-raised)] space-y-5"
       >
         <div className="border-b border-[var(--border-subtle)] pb-4">
           <span className="font-[family-name:var(--font-mono)] text-[length:var(--text-caption)] font-semibold uppercase tracking-wider text-[var(--accent-text)]">
@@ -79,20 +102,28 @@ export function OrderTracker({ initialReference = "" }: { initialReference?: str
           </p>
         </div>
 
-        <Field id="tracker-reference" error={error ? "" : null} required className="w-full min-w-0 max-w-full">
+        <Field id="tracker-reference" error={fieldErrors.reference} required className="w-full min-w-0 max-w-full">
           <FieldLabel>Order reference</FieldLabel>
           <Input
             name="reference"
             placeholder="e.g. BF-12345"
             value={reference}
-            onChange={(event) => setReference(event.target.value.toUpperCase())}
+            onChange={(event) => {
+              setReference(event.target.value.toUpperCase());
+              setFieldErrors((f) => {
+                const next = { ...f };
+                delete next.reference;
+                return next;
+              });
+            }}
             autoComplete="off"
             required
             className="w-full min-w-0 max-w-full font-[family-name:var(--font-mono)]"
           />
+          <FieldError />
         </Field>
 
-        <Field id="tracker-email" error={error ? "" : null} required className="w-full min-w-0 max-w-full">
+        <Field id="tracker-email" error={fieldErrors.email} required className="w-full min-w-0 max-w-full">
           <FieldLabel>Checkout email</FieldLabel>
           <Input
             name="email"
@@ -101,16 +132,24 @@ export function OrderTracker({ initialReference = "" }: { initialReference?: str
             inputMode="email"
             placeholder="you@example.com"
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(event) => {
+              setEmail(event.target.value);
+              setFieldErrors((f) => {
+                const next = { ...f };
+                delete next.email;
+                return next;
+              });
+            }}
             required
             className="w-full min-w-0 max-w-full"
           />
+          <FieldError />
         </Field>
 
         {error ? (
           <p
             role="alert"
-            className="rounded-[var(--radius-md)] bg-[var(--state-error-bg)] p-3 text-[length:var(--text-body-sm)] text-[var(--state-error)]"
+            className="rounded-[var(--radius-md)] bg-[var(--state-error-bg)] p-3 text-[length:var(--text-body-sm)] text-[var(--state-error)] leading-relaxed"
           >
             {error}
           </p>
